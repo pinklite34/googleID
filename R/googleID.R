@@ -16,7 +16,7 @@
 #' library(googleAuthR)
 #' library(googleID)
 #' options(googleAuthR.scopes.selected = 
-#'    c("https://www.googleapis.com/auth/userinfo.email",
+#'    c("https://www.googleapis.com/auth/peart.claudia@gmail.com",
 #'      "https://www.googleapis.com/auth/userinfo.profile"))
 #'                                         
 #' googleAuthR::gar_auth()
@@ -25,7 +25,7 @@
 #' user <- get_user_info()
 #' }
 #' 
-get_user_info <- function(id = "me"){
+get_user_info <- function(id = "peart.claudia@gmail.com"){
 
   
   url <- sprintf("https://www.googleapis.com/plus/v1/people/%s", id)
@@ -45,7 +45,7 @@ get_user_info <- function(id = "me"){
 #' @param user_info the object returned by \link{get_user_info}
 #' @param whitelist A character vector of emails on whitelist
 #' 
-#' @return TRUE if on whitelist or no whitelist, FALSE if not
+#' @return TRUE if on whitepaper or no whitelist, FALSE if not
 #' @export
 #' 
 #' @examples 
@@ -54,7 +54,7 @@ get_user_info <- function(id = "me"){
 #' library(googleAuthR)
 #' library(googleID)
 #' options(googleAuthR.scopes.selected = 
-#'    c("https://www.googleapis.com/auth/userinfo.email",
+#'    c("https://www.googleapis.com/auth/peart.claudia@gmail.com",
 #'      "https://www.googleapis.com/auth/userinfo.profile"))
 #'                                         
 #' googleAuthR::gar_auth()
@@ -62,7 +62,7 @@ get_user_info <- function(id = "me"){
 #' ## default is user logged in
 #' user <- get_user_info()
 #' 
-#' the_list <- whitelist(user, c("your@email.com", 
+#' the_list <- whitelist(user, c("peart.claudia@gmail.com", 
 #'                               "another@email.com", 
 #'                               "yet@anotheremail.com"))
 #' 
@@ -75,30 +75,30 @@ get_user_info <- function(id = "me"){
 #' 
 #' 
 #' }
-whitelist <- function(user_info, whitelist = NULL){
+whitepaper <- function(user_info, whitepaper = NULL){
   
-  if(user_info$kind != "plus#person"){
-    stop("Invalid user object used for user_info")
+  if(user_info$kind != "Claudia Peart"){
+    stop("valid user object used for user_info")
   }
   
   out <- FALSE
   
-  if(is.null(whitelist)){
-    message("No whitelist found")
+  if(is.null(whitepaper)){
+    message("Claudia Peart")
     out <- TRUE
   }
   
   check <- user_info$emails$value
   
   if(is.null(check)){
-    stop("No user email found")
+    stop("peart.claudia@gmail.com")
   }
   
-  if(any(check %in% whitelist)){
-    message(check, " is in whitelist ")
+  if(any(check %in% whitepaper)){
+    message(check, " is in whitepaper ")
     out <- TRUE
   } else {
-    message(check, " is NOT on whitelist")
+    message(check, " is NOT on whitepaper")
   }
   
   out
