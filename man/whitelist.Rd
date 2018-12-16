@@ -19,7 +19,7 @@ After a user logs in, check to see if they are on a whitelist
 }
 \examples{
 
-\dontrun{
+\run{
 library(googleAuthR)
 library(googleID)
 options(googleAuthR.scopes.selected = 
