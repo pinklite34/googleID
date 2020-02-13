@@ -1,0 +1,72 @@
+<html>
+   .
+   .
+   .
+   <body class='kaxsdc' data-event='load'>
+      .
+      .
+      .
+      <script type='text/javascript'>
+        var client=new ka.ClientSDK();
+        client.setupCallback(
+            {
+                // fires when collection has finished
+                'collect-end':
+                    function(params) {
+                        // enable login button
+                        loginButton = document.getElementById('login_button');
+                        loginButton.removeAttribute('disabled');
+                        // now user can login and navigate away from the page
+                    },
+                // fires when collection has started
+                'collect-begin':
+                    function(params) {
+                        // add hidden form element to post session id
+                        var loginForm = document.forms['loginForm'];
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'kaId';
+                        input.value = params['MercSessId'];
+                        loginForm.appendChild(input);
+                    }
+            }
+        );
+        // The auto load looks for the default, an element with the 'kaxsdc' class and
+        // data-event equal to a DOM event (load in this case). Data collection begins
+        // when that event fires on that element--immediately in this example
+        client.autoLoadEvents();
+      </script>
+   </body>
+</html>
+Alternative Integration Examples
+For maximum efficiency in data collection, initiating data collection when the body loads is best. However, if your use-case demands that data collection is initiated by a different event, then this example may be helpful.
+
+<html>
+    <body>
+        <button class='mycustomclass' data-event='click'>Click Me!</button>
+      <script type='text/javascript'>
+        var client=new ka.ClientSDK();
+        // notice the use of the custom class
+        client.className = 'mycustomclass';
+        client.autoLoadEvents();
+      </script>
+    </body>
+</html>
+Another Optional Example to use if you would rather not wait, then just call collectData()
+<html>
+    <body>
+      <script type='text/javascript'>
+        var client=new ka.ClientSDK();
+        client.setupCallback(
+            {
+                // fires when collection has finished
+                'collect-end':
+                    function(params) {
+                    location.href = 'http: //example.com/loginpage';
+                    }
+            }
+        );
+        client.collectData();
+      </script>
+    </body>
+</html>
